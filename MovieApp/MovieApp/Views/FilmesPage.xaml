@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.FilmesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+    x:Name="thisPage"
+    Title="{Binding NomeCinema, StringFormat='Filmes - {0:}'}"
+    BackgroundColor="{StaticResource Preto}">
+    <ContentPage.Behaviors>
+        <behavior:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <!--  STYLES  -->
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Branco}" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+
+        </Style>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsDesbloquerTela}"
+                    TargetType="StackLayout"
+                    Value="False">
+                    <Setter Property="Opacity" Value="0.3" />
+                    <Setter Property="InputTransparent" Value="True" />
+                </DataTrigger>
+            </StackLayout.Triggers>
+            <CollectionView
+                Margin="5"
+                ItemsSource="{Binding FilmesBinding}"
+                ItemsUpdatingScrollMode="KeepLastItemInView"
+                SelectionMode="None"
+                VerticalScrollBarVisibility="Always">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="2">
+                            <Frame
+                                Padding="8"
+                                BackgroundColor="{StaticResource RoxoEscuro}"
+                                BorderColor="Black"
+                                CornerRadius="10"
+                                VerticalOptions="CenterAndExpand">
+                                <Grid
+                                    ColumnDefinitions="100,25*"
+                                    ColumnSpacing="20"
+                                    RowDefinitions="35, 18, 18, 18, 25">
+
+                                    <Frame
+                                        Grid.RowSpan="5"
+                                        Padding="0"
+                                        BackgroundColor="LightCyan"
+                                        CornerRadius="5">
+                                        <!--  capa DVD aqui  -->
+                                        <Image Aspect="AspectFill" Source="{Binding FotoImageSource, Mode=OneTime}" />
+                                    </Frame>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        Text="{Binding NomeFilme}" />
+                                    <Label Grid.Row="1" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Diretor: " />
+                                                <Span FontAttributes="Bold" Text="{Binding Diretor}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Row="2" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Duração: " />
+                                                <Span FontAttributes="Bold" Text="{Binding Duracao, StringFormat='{0:} minutos'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Row="3" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Idioma: " />
+                                                <Span FontAttributes="Bold" Text="{Binding Idioma}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="4"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="{Binding NotaAvaliacao, StringFormat='{0:} ⭐'}" />
+
+
+                                </Grid>
+                            </Frame>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference thisPage}}" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!--  Em caso de lista vazia  -->
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="Nenhum filme encontrado" />
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

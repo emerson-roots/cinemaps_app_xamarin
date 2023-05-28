@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.ConclusaoCadastroPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    Title="Conclusão"
+    BackgroundColor="{StaticResource Preto}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="10" Spacing="0">
+                <Label
+                    Margin="0,10,0,20"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="Parabéns!"
+                    TextColor="White" />
+                <Label
+                    Margin="10,0"
+                    FontSize="Small"
+                    HorizontalTextAlignment="Center"
+                    Text="Seu cadastro foi concluído com sucesso. Vá para o login e entre com o e-mail e senha cadastrada."
+                    TextColor="Gray" />
+                <Grid
+                    RowDefinitions="400"
+                    RowSpacing="0"
+                    VerticalOptions="CenterAndExpand">
+
+                    <lottie:AnimationView
+                        Animation="success.json"
+                        AutoPlay="True"
+                        RepeatMode="Infinite" />
+                </Grid>
+
+                <Button
+                    Margin="5,10"
+                    BackgroundColor="{StaticResource RoxoClaro}"
+                    Command="{Binding IrParaLoginCommand}"
+                    CornerRadius="25"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="login"
+                    VerticalOptions="EndAndExpand"
+                    WidthRequest="250">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Offset="0.1" Color="{StaticResource RoxoClaro}" />
+                            <GradientStop Offset="0.7" Color="{StaticResource RoxoEscuro}" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Custom.CustomDisplayAlertOkPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="_alertPage"
+    Padding="40"
+    BackgroundColor="{Binding TelaBindings.CorFundo}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout
+            IsEnabled="{Binding IsModalAtivado}"
+            Spacing="0"
+            VerticalOptions="Center">
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="10"
+                HasShadow="False">
+                <StackLayout Spacing="0">
+                    <Image
+                        Margin="0,0,0,20"
+                        xct:IconTintColorEffect.TintColor="{Binding TelaBindings.CorBotao}"
+                        Source="{Binding TelaBindings.Icone}"
+                        WidthRequest="90" />
+                    <Label
+                        Margin="0,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding TelaBindings.Titulo}"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand" />
+                    <ScrollView Margin="0,20">
+                        <Label
+                            FontSize="Small"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding TelaBindings.Mensagem}" />
+                    </ScrollView>
+
+                    <Button
+                        Margin="0,0,0,0"
+                        BackgroundColor="{Binding TelaBindings.CorBotao}"
+                        Command="{Binding BotaoOk}"
+                        CommandParameter="{Binding Source={x:Reference _alertPage}}"
+                        CornerRadius="25"
+                        Text="Ok" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

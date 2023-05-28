@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.CinemaListaPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="viewModel"
+    Title="{Binding ComplementoTituloPagina, StringFormat='Cinemas em: {0:}'}"
+    BackgroundColor="{StaticResource Preto}"
+    IsBusy="{Binding IsBusy}">
+    <!--  STYLES  -->
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Branco}" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+
+        </Style>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource Preto}">
+
+            <StackLayout.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsBusy}"
+                    TargetType="StackLayout"
+                    Value="True">
+                    <Setter Property="Opacity" Value="0.3" />
+                    <Setter Property="InputTransparent" Value="True" />
+                </DataTrigger>
+            </StackLayout.Triggers>
+
+            <CollectionView
+                ItemsSource="{Binding Path=BindingContext.CinemasBinding, Source={x:Reference viewModel}}"
+                ItemsUpdatingScrollMode="KeepLastItemInView"
+                SelectionMode="None"
+                VerticalScrollBarVisibility="Always">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Spacing="0">
+
+                            <Frame
+                                Margin="10,5"
+                                Padding="5"
+                                BackgroundColor="{StaticResource RoxoEscuro}"
+                                CornerRadius="5"
+                                HorizontalOptions="FillAndExpand">
+                                <Grid
+                                    ColumnDefinitions="50*"
+                                    RowDefinitions="140, 34, 22, 25"
+                                    RowSpacing="0">
+                                    <CarouselView
+                                        Grid.ColumnSpan="3"
+                                        Margin="5"
+                                        IndicatorView="indicatorView"
+                                        IsScrollAnimated="True"
+                                        ItemsSource="{Binding FotosCinema}"
+                                        ItemsUpdatingScrollMode="KeepItemsInView"
+                                        Loop="False"
+                                        PeekAreaInsets="{Binding Count}">
+                                        <CarouselView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Padding="0" CornerRadius="5">
+                                                    <!--  capa DVD aqui  -->
+                                                    <Image Aspect="AspectFill" Source="{Binding FotoImageSource}" />
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CarouselView.ItemTemplate>
+
+
+                                        <!--  Em caso de lista vazia  -->
+                                        <CarouselView.EmptyView>
+                                            <ContentView>
+                                                <Frame
+                                                    Margin="5"
+                                                    Padding="0"
+                                                    CornerRadius="5">
+                                                    <!--  capa DVD aqui  -->
+                                                    <Image Aspect="AspectFill" Source="sem_foto_cinema" />
+                                                </Frame>
+                                            </ContentView>
+                                        </CarouselView.EmptyView>
+
+
+
+                                    </CarouselView>
+                                    <IndicatorView
+                                        x:Name="indicatorView"
+                                        Margin="0,10"
+                                        HorizontalOptions="CenterAndExpand"
+                                        IndicatorColor="Black"
+                                        IndicatorSize="15"
+                                        IndicatorsShape="Circle"
+                                        SelectedIndicatorColor="{StaticResource Verde}"
+                                        VerticalOptions="EndAndExpand" />
+
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="8,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        Text="{Binding NomeCinema}" />
+
+
+                                    <Label Grid.Row="2" Margin="8,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontAttributes="Bold" Text="{Binding NotaAvaliacao, StringFormat='{0:} '}" />
+                                                <Span FontAttributes="Bold" Text=" ⭐⭐⭐⭐⭐ " />
+                                                <Span Text=" (767)" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Row="3" Margin="8,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontAttributes="Bold" Text="{Binding Cidade.Descricao}" />
+                                                <Span Text=" • " />
+                                                <Span Text="{Binding DistanciaLocalizacao, StringFormat='{0:} km'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label
+                                        Grid.Row="3"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="End"
+                                        Text="Ver filmes &gt;"
+                                        TextColor="{StaticResource Branco}"
+                                        TextDecorations="Underline"
+                                        VerticalOptions="Start" />
+                                </Grid>
+
+                            </Frame>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference viewModel}}" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!--  Em caso de lista vazia  -->
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                Text="Nenhum filme encontrado" />
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

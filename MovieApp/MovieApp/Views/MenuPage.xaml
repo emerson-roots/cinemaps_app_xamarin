@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.MenuPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="Menu"
+    BackgroundColor="{StaticResource RoxoEscuro}">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout IsEnabled="{Binding IsMenuAtivado}">
+
+                <!--  Opacity com ActivityIndicator enabled  -->
+                <StackLayout.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference activity}, Path=IsVisible}"
+                        TargetType="StackLayout"
+                        Value="True">
+                        <Setter Property="Opacity" Value="0.3" />
+                        <Setter Property="InputTransparent" Value="True" />
+                    </DataTrigger>
+                </StackLayout.Triggers>
+
+                <!--  HEADER  -->
+                <Frame
+                    Padding="0"
+                    BackgroundColor="{StaticResource Cinza}"
+                    BorderColor="{StaticResource CinzaEscuro}"
+                    CornerRadius="0"
+                    HasShadow="False">
+                    <Label
+                        Margin="10"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        Text="Menu"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </Frame>
+
+                <!--  SAIR  -->
+                <Frame
+                    Padding="10,2"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogoutUsuarioCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="40*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="1" />
+
+                        </Grid.RowDefinitions>
+                        <Image xct:IconTintColorEffect.TintColor="{StaticResource Branco}" Source="exit_white.png" />
+                        <Label
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="Body"
+                            Text="Sair"
+                            TextColor="{StaticResource Branco}"
+                            VerticalTextAlignment="Center" />
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="{StaticResource CinzaEscuro}"
+                            HeightRequest="1" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+            <ActivityIndicator
+                x:Name="activity"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsActivityIndicatorEnabledBinding}"
+                IsVisible="{Binding IsActivityIndicatorEnabledBinding}"
+                VerticalOptions="Center"
+                WidthRequest="70"
+                Color="#5B91C9" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

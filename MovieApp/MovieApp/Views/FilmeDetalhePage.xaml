@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.FilmeDetalhePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CustomLabel"
+    x:Name="viewModel"
+    Title="Sessões disponíveis"
+    BackgroundColor="{StaticResource Preto}"
+    NavigationPage.HasBackButton="True"
+    NavigationPage.HasNavigationBar="True">
+
+    <!--  STYLES  -->
+    <ContentPage.Resources>
+        <Style x:Key="frmDetalhes" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#494949" />
+            <Setter Property="Padding" Value="5,2" />
+            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+
+        <Style x:Key="lblDetalhes" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Micro" />
+        </Style>
+
+        <Style x:Key="frmEfeitoTransparencia" TargetType="Frame">
+            <Setter Property="Background">
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="Transparent" />
+                    <GradientStop Offset="1.0" Color="{StaticResource Preto}" />
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView Padding="0,0,0,20">
+            <Grid ColumnDefinitions="30*,30*,30,30,30" RowDefinitions="250, 20,30,*,20, 60, 80">
+                <Image
+                    Grid.ColumnSpan="5"
+                    Aspect="AspectFill"
+                    BackgroundColor="Gray"
+                    Source="{Binding FilmeBinding.FotoImageSource, Mode=OneTime}" />
+                <Frame
+                    Grid.ColumnSpan="5"
+                    HeightRequest="80"
+                    Style="{StaticResource frmEfeitoTransparencia}"
+                    VerticalOptions="End" />
+
+                <FlexLayout
+                    Grid.Row="1"
+                    Grid.ColumnSpan="5"
+                    Margin="25,0"
+                    AlignItems="Center">
+                    <Frame FlexLayout.Shrink="0" Style="{StaticResource frmDetalhes}">
+                        <Label Style="{StaticResource lblDetalhes}" Text="{Binding FilmeBinding.FaixaEtaria, StringFormat='{0:}+'}" />
+                    </Frame>
+
+                    <Frame Style="{StaticResource frmDetalhes}">
+                        <Label
+                            LineBreakMode="TailTruncation"
+                            Style="{StaticResource lblDetalhes}"
+                            Text="{Binding FilmeBinding.Idioma}" />
+                    </Frame>
+
+                    <Frame
+                        Margin="5,0"
+                        FlexLayout.Shrink="0"
+                        Style="{StaticResource frmDetalhes}">
+                        <Label Style="{StaticResource lblDetalhes}" Text="{Binding FilmeBinding.Categoria}" />
+                    </Frame>
+
+                    <!--  COMPONENTE SÒ PARA DAR ESPACAMENTO  -->
+                    <BoxView FlexLayout.Grow="1" />
+
+                    <Frame
+                        BackgroundColor="Transparent"
+                        FlexLayout.Shrink="0"
+                        Style="{StaticResource frmDetalhes}">
+                        <Label
+                            FontSize="Micro"
+                            Text="{Binding FilmeBinding.DuracaoFormatada, StringFormat='&#128344; {0:%h}h {0:mm}m'}"
+                            TextColor="White" />
+                    </Frame>
+                </FlexLayout>
+
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="5"
+                    Margin="30,0"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding FilmeBinding.NomeFilme}"
+                    TextColor="White" />
+                <local:CustomLabel
+                    Grid.Row="3"
+                    Grid.ColumnSpan="5"
+                    Margin="30,0"
+                    FontSize="Micro"
+                    Text="{Binding FilmeBinding.Sinopse}"
+                    TextColor="Gray" />
+                <FlexLayout
+                    Grid.Row="4"
+                    Grid.ColumnSpan="5"
+                    Margin="30,0">
+                    <BoxView
+                        CornerRadius="10"
+                        FlexLayout.AlignSelf="Center"
+                        FlexLayout.Grow="1"
+                        HeightRequest="0.1"
+                        VerticalOptions="Center"
+                        Color="White" />
+
+                    <Frame
+                        Padding="20,2"
+                        BackgroundColor="{StaticResource Preto}"
+                        BorderColor="White"
+                        FlexLayout.AlignSelf="Center"
+                        HasShadow="False">
+                        <Label
+                            FontSize="Micro"
+                            HorizontalTextAlignment="Center"
+                            Text="Selecione uma data"
+                            TextColor="White" />
+                    </Frame>
+                    <BoxView
+                        CornerRadius="10"
+                        FlexLayout.AlignSelf="Center"
+                        FlexLayout.Grow="1"
+                        HeightRequest="0.1"
+                        VerticalOptions="Center"
+                        Color="White" />
+                </FlexLayout>
+
+                <CollectionView
+                    Grid.Row="5"
+                    Grid.ColumnSpan="5"
+                    Margin="30,0"
+                    HorizontalOptions="CenterAndExpand"
+                    ItemsLayout="HorizontalList"
+                    ItemsSource="{Binding DatasSessoes}"
+                    SelectedItem="{Binding DataSelecionada}"
+                    SelectionMode="Single"
+                    VerticalOptions="CenterAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame
+                                    Margin="3,0"
+                                    Padding="7,2"
+                                    BorderColor="White"
+                                    CornerRadius="5"
+                                    VerticalOptions="CenterAndExpand">
+                                    <Grid>
+                                        <Label
+                                            HorizontalOptions="Center"
+                                            Text="{Binding ., StringFormat='{0:dd}'}"
+                                            TextColor="White" />
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="Micro"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding ., StringFormat='{0:MMM}'}"
+                                            TextColor="White" />
+                                    </Grid>
+                                    <Frame.Background>
+                                        <!--  StartPoint defaults to (0,0)  -->
+                                        <LinearGradientBrush EndPoint="1,1">
+
+                                            <GradientStop Offset="0.1" Color="{StaticResource Preto}" />
+                                            <GradientStop Offset="0.1" Color="{StaticResource Preto}" />
+                                            <GradientStop Offset="1.0" Color="{StaticResource RoxoEscuro}" />
+
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <!--  Em caso de lista vazia  -->
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <StackLayout VerticalOptions="CenterAndExpand">
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    HorizontalTextAlignment="Center"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Não há datas disponíveis para este filme"
+                                    TextColor="White" />
+                            </StackLayout>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+
+                <Frame
+                    Grid.Row="6"
+                    Grid.ColumnSpan="5"
+                    Margin="30,0"
+                    Padding="10,5"
+                    BackgroundColor="#2D302D"
+                    BorderColor="White"
+                    CornerRadius="10"
+                    IsVisible="{Binding IsSessoesVisivel}">
+                    <Grid
+                        RowDefinitions="25,36"
+                        RowSpacing="0"
+                        VerticalOptions="Center">
+
+                        <Label
+                            Margin="5,0"
+                            FontAttributes="Bold"
+                            Text="{Binding DataSelecionada, StringFormat='&#128344; Sessões disponíveis - {0:dddd}'}"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+
+                        <CollectionView
+                            Grid.Row="1"
+                            ItemsLayout="HorizontalList"
+                            ItemsSource="{Binding HorariosDataSelecionada}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Spacing="0">
+                                        <Button
+                                            Margin="4,2"
+                                            Padding="2"
+                                            BorderColor="White"
+                                            BorderWidth="0.5"
+                                            CornerRadius="5"
+                                            HeightRequest="25"
+                                            IsEnabled="False"
+                                            Text="{Binding ., StringFormat='{0:hh\\:mm}'}"
+                                            TextColor="White"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="50" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

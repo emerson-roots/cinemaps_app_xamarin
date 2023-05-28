@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <RelativeLayout>
+
+                <!--  Opacity com ActivityIndicator enabled  -->
+                <RelativeLayout.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference activity}, Path=IsVisible}"
+                        TargetType="RelativeLayout"
+                        Value="True">
+                        <Setter Property="Opacity" Value="0.3" />
+                        <Setter Property="InputTransparent" Value="True" />
+                    </DataTrigger>
+                </RelativeLayout.Triggers>
+
+                <!--  IMAGEM FUNDO  -->
+                <RelativeLayout.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0.1" Color="MediumBlue" />
+                        <GradientStop Offset="0.7" Color="{StaticResource RoxoEscuro}" />
+                    </LinearGradientBrush>
+                </RelativeLayout.Background>
+
+                <Image
+                    Aspect="AspectFill"
+                    BackgroundColor="Black"
+                    Opacity="0.5"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                           Property=Height}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                          Property=Width}"
+                    Source="movies_background" />
+                <Grid RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+                    <ScrollView>
+
+
+                        <StackLayout Margin="10" Spacing="0">
+
+
+
+                            <Grid ColumnDefinitions="200, 100*" VerticalOptions="CenterAndExpand" RowSpacing="0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="46" />
+                                    <!--  ESPAÇO VAZIO + ACTIVITY INDICATOR  -->
+                                    <RowDefinition Height="40" />
+                                    <!--  CNH  -->
+                                    <RowDefinition Height="22" />
+                                    <RowDefinition Height="50" />
+
+                                    <!--  ESPACO VAZIO  -->
+                                    <RowDefinition Height="5" />
+
+                                    <!--  SENHA  -->
+                                    <RowDefinition Height="22" />
+                                    <RowDefinition Height="50" />
+
+                                    <!--  ENTRAR, ESQUECI MINHA SENHA  -->
+                                    <RowDefinition Height="90" />
+                                    <RowDefinition Height="40" />
+
+                                </Grid.RowDefinitions>
+
+                                <!--  logo  -->
+                                <Image
+                                    Grid.ColumnSpan="2"
+                                    xct:IconTintColorEffect.TintColor="White"
+                                    Source="tv_240px" />
+                                <!--  NOME APP  -->
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    FontAttributes="Bold"
+                                    FontSize="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="MovieApp"
+                                    TextColor="{StaticResource Branco}"
+                                    VerticalTextAlignment="Center" />
+
+                                <!--  INDICATOR  -->
+                                <ActivityIndicator
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.3"
+                                    AbsoluteLayout.LayoutFlags="All"
+                                    IsRunning="{Binding Aguarde}"
+                                    IsVisible="{Binding Aguarde}"
+                                    Color="White" />
+
+                                <Label
+                                    Padding="0"
+                                    Grid.Row="3"
+                                    Margin="10,0"
+                                    FontAttributes="Bold"
+                                    Text="E-mail:"
+                                    TextColor="White" />
+
+                                <Frame
+                                    Grid.Row="4"
+                                    Grid.ColumnSpan="2"
+                                    Padding="0"
+                                    BorderColor="{StaticResource RoxoEscuro}"
+                                    CornerRadius="15">
+
+                                    <Grid
+                                        Padding="0"
+                                        ColumnSpacing="0"
+                                        RowSpacing="0"
+                                        VerticalOptions="CenterAndExpand">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="54" />
+                                        </Grid.RowDefinitions>
+
+                                        <ImageButton
+                                            Margin="15,0,0,0"
+                                            xct:IconTintColorEffect.TintColor="DimGray"
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="25"
+                                            HorizontalOptions="StartAndExpand"
+                                            InputTransparent="False"
+                                            Source="avatar" />
+
+                                        <Entry
+                                            Keyboard="Email"
+                                            Grid.ColumnSpan="2"
+                                            Margin="45,-6"
+                                            FontSize="Small"
+                                            Placeholder="Digite seu login"
+                                            Text="{Binding Credenciais.Email}"
+                                            TextColor="DimGray" />
+                                    </Grid>
+
+                                </Frame>
+
+                                <!--  SENHA  -->
+                                <Label
+                                    Grid.Row="6"
+                                    Margin="10,0"
+                                    FontAttributes="Bold"
+                                    Text="Senha:"
+                                    TextColor="White" />
+
+                                <Frame
+                                    Grid.Row="7"
+                                    Grid.ColumnSpan="2"
+                                    Padding="0"
+                                    BorderColor="{StaticResource RoxoEscuro}"
+                                    CornerRadius="15">
+
+                                    <Grid
+                                        Padding="0"
+                                        ColumnSpacing="0"
+                                        RowSpacing="0"
+                                        VerticalOptions="CenterAndExpand">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="54" />
+                                        </Grid.RowDefinitions>
+
+                                        <ImageButton
+                                            Margin="15,0,0,0"
+                                            xct:IconTintColorEffect.TintColor="DimGray"
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="25"
+                                            HorizontalOptions="StartAndExpand"
+                                            InputTransparent="False"
+                                            Source="lock_120px" />
+
+                                        <Entry
+                                            Grid.ColumnSpan="2"
+                                            Margin="45,-6"
+                                            FontSize="Small"
+                                            IsPassword="{Binding IsEsconderSenhaBinding}"
+                                            Placeholder="Digite sua senha"
+                                            Text="{Binding Credenciais.Password}"
+                                            TextColor="DimGray" />
+                                        <ImageButton
+                                            Grid.Column="1"
+                                            Margin="0,0,2,0"
+                                            Padding="10"
+                                            xct:IconTintColorEffect.TintColor="DimGray"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding MostrarSenhaCommand}"
+                                            HeightRequest="50"
+                                            HorizontalOptions="EndAndExpand"
+                                            InputTransparent="False"
+                                            Source="{Binding IconeMostrarOuEsconderSenhaBinding}" />
+                                    </Grid>
+
+                                </Frame>
+
+                                <!--  BOTÃO ENTRAR  -->
+                                <Button
+                                    Grid.Row="8"
+                                    Grid.ColumnSpan="2"
+                                    Margin="100,0"
+                                    BackgroundColor="{StaticResource RoxoEscuro}"
+                                    BorderColor="White"
+                                    BorderWidth="0.5"
+                                    Command="{Binding FazerLoginCommand}"
+                                    CornerRadius="25"
+                                    FontAttributes="Bold"
+                                    Text="Entrar"
+                                    TextColor="White"
+                                    VerticalOptions="End">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0,1">
+                                            <GradientStop Offset="0.1" Color="{StaticResource RoxoClaro}" />
+                                            <GradientStop Offset="0.7" Color="{StaticResource RoxoEscuro}" />
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <FlexLayout
+                                    Grid.Row="9"
+                                    Grid.ColumnSpan="2"
+                                    JustifyContent="SpaceBetween">
+                                    <Label
+                                        Margin="15,0"
+                                        Padding="0,10"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Esqueci minha senha"
+                                        TextColor="White"
+                                        TextDecorations="Underline">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EsqueciMinhaSenhaCommand}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!--  LEMBRAR DE MIM  -->
+                                    <Grid
+                                        Margin="15,0"
+                                        ColumnDefinitions="108,30"
+                                        ColumnSpacing="0"
+                                        FlexLayout.Shrink="0">
+                                        <Label
+                                            HorizontalOptions="End"
+                                            LineBreakMode="TailTruncation"
+                                            Text="Lembrar de mim?"
+                                            TextColor="White"
+                                            VerticalTextAlignment="Center" />
+                                        <CheckBox
+                                            Grid.Column="1"
+                                            HorizontalOptions="Start"
+                                            IsChecked="{Binding LembrarDeMim}"
+                                            Color="White" />
+                                    </Grid>
+
+                                </FlexLayout>
+                            </Grid>
+
+                            <!--  CADASTRE-S  -->
+                            <FlexLayout
+                                AlignItems="Center"
+                                Direction="Row"
+                                JustifyContent="Center">
+
+                                <Label Text="Ainda não tem uma conta?" TextColor="White" />
+                                <Label
+                                    Padding="6,10"
+                                    FontAttributes="Bold"
+                                    Text="Cadastre-se"
+                                    TextColor="White"
+                                    TextDecorations="Underline">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CriarCadastroCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </StackLayout>
+
+                    </ScrollView>
+
+                </Grid>
+
+            </RelativeLayout>
+            <ActivityIndicator
+                x:Name="activity"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsActivityIndicatorEnabledBinding}"
+                IsVisible="{Binding IsActivityIndicatorEnabledBinding}"
+                VerticalOptions="Center"
+                WidthRequest="70"
+                Color="{StaticResource RoxoClaro}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

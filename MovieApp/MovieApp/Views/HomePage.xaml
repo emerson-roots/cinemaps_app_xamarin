@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieApp.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    BackgroundColor="{StaticResource Preto}">
+    <ContentPage.Content>
+
+        <Grid>
+
+            <ScrollView>
+                <StackLayout Margin="10" Spacing="0">
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Source={x:Reference activity}, Path=IsVisible}"
+                            TargetType="StackLayout"
+                            Value="True">
+                            <Setter Property="Opacity" Value="0.3" />
+                            <Setter Property="InputTransparent" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+
+                    <Label
+                        Margin="10"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        Text="Bem-vindo!"
+                        TextColor="White" />
+                    <Label
+                        Margin="10,0"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Center"
+                        Text="Para prosseguir, selecione uma cidade ou região para carregar os cinemas de acordo com a localidade selecionada."
+                        TextColor="Gray" />
+
+
+                    <Grid
+                        RowDefinitions="270"
+                        RowSpacing="0"
+                        VerticalOptions="CenterAndExpand">
+
+                        <lottie:AnimationView
+                            Animation="location_animation.json"
+                            AutoPlay="True"
+                            RepeatMode="Infinite" />
+                    </Grid>
+
+                    <Frame
+                        Margin="0,10"
+                        Padding="5,0"
+                        BackgroundColor="Transparent"
+                        BorderColor="#58595B"
+                        HasShadow="False">
+                        <StackLayout>
+
+
+                            <FlexLayout
+                                Margin="5,0"
+                                Direction="Row"
+                                JustifyContent="Center"
+                                RadioButtonGroup.GroupName="tipoConsulta"
+                                RadioButtonGroup.SelectedValue="{Binding SelectedRadioButtonBinding}">
+                                <Label
+                                    FontSize="Micro"
+                                    Text="Buscar por: "
+                                    TextColor="Gray"
+                                    VerticalTextAlignment="Center" />
+                                <RadioButton
+                                    Content="Cidade"
+                                    FontSize="Micro"
+                                    IsChecked="True"
+                                    TextColor="Gray"
+                                    Value="Cidade" />
+                                <RadioButton
+                                    Content="Região"
+                                    FontSize="Micro"
+                                    TextColor="Gray"
+                                    Value="Região" />
+
+                            </FlexLayout>
+
+                            <Picker
+                                Title="Selecione a cidade..."
+                                Grid.Row="1"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                IsVisible="{Binding IsPickerCidadeVisivel}"
+                                ItemDisplayBinding="{Binding Descricao}"
+                                ItemsSource="{Binding Cidades}"
+                                SelectedItem="{Binding CidadeSelecionada}"
+                                TextColor="White"
+                                TitleColor="Gray" />
+
+
+                            <Picker
+                                Title="Selecione a região..."
+                                Grid.Row="1"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                IsVisible="{Binding IsPickerRegiaoVisivel}"
+                                ItemDisplayBinding="{Binding Descricao}"
+                                ItemsSource="{Binding Regioes}"
+                                SelectedItem="{Binding RegiaoSelecionada}"
+                                TextColor="White"
+                                TitleColor="Gray" />
+
+                        </StackLayout>
+                    </Frame>
+
+                    <Button
+                        Margin="5,10"
+                        BackgroundColor="{StaticResource RoxoClaro}"
+                        Command="{Binding IrParaCinemasPageCommand}"
+                        CornerRadius="25"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="próximo"
+                        VerticalOptions="EndAndExpand"
+                        WidthRequest="250">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Offset="0.1" Color="{StaticResource RoxoClaro}" />
+                                <GradientStop Offset="0.7" Color="{StaticResource RoxoEscuro}" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackLayout>
+            </ScrollView>
+            <ActivityIndicator
+                x:Name="activity"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsActivityIndicatorEnabledBinding}"
+                IsVisible="{Binding IsActivityIndicatorEnabledBinding}"
+                VerticalOptions="Center"
+                WidthRequest="70"
+                Color="{StaticResource Branco}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="MovieApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  paleta de cores globais  -->
+            <Color x:Key="CinzaEscuro">#58595B</Color>
+            <Color x:Key="AzulEscuro">#0072BC</Color>
+
+            <Color x:Key="RoxoEscuro">#3B1466</Color>
+            <Color x:Key="RoxoClaro">#8334DB</Color>
+            <Color x:Key="Rosa">#f049fc</Color>
+            <Color x:Key="Preto">#1B1D1B</Color>
+            <Color x:Key="Branco">White</Color>
+            <Color x:Key="Cinza">#69677B</Color>
+            <Color x:Key="Verde">#91e2a8</Color>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="Black" />
+            </Style>
+
+
+            <!--  efeito disabled nos buttons  -->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource CinzaEscuro}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

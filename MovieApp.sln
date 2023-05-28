@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApp.Android", "MovieApp\MovieApp.Android\MovieApp.Android.csproj", "{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieApp", "MovieApp\MovieApp\MovieApp.csproj", "{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AB2ECE5-5AFF-4840-941B-0732EA42EA49}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD61866-53C9-4E2C-81B1-FFCBC5CCBBC0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BB1963F-2485-4288-90B9-58F8CDC92249}
+	EndGlobalSection
+EndGlobal
