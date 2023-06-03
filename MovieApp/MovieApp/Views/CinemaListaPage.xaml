@@ -150,7 +150,7 @@
                                 FontAttributes="Bold"
                                 FontSize="Medium"
                                 HorizontalTextAlignment="Center"
-                                Text="Nenhum filme encontrado" />
+                                Text="Nenhum cinema encontrado" />
                         </StackLayout>
                     </ContentView>
                 </CollectionView.EmptyView>

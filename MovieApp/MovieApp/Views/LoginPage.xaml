@@ -45,7 +45,10 @@
 
 
 
-                            <Grid ColumnDefinitions="200, 100*" VerticalOptions="CenterAndExpand" RowSpacing="0">
+                            <Grid
+                                ColumnDefinitions="200, 100*"
+                                RowSpacing="0"
+                                VerticalOptions="CenterAndExpand">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="100" />
@@ -81,7 +84,7 @@
                                     FontAttributes="Bold"
                                     FontSize="35"
                                     HorizontalTextAlignment="Center"
-                                    Text="MovieApp"
+                                    Text="Cinemarks"
                                     TextColor="{StaticResource Branco}"
                                     VerticalTextAlignment="Center" />
 
@@ -96,9 +99,9 @@
                                     Color="White" />
 
                                 <Label
-                                    Padding="0"
                                     Grid.Row="3"
                                     Margin="10,0"
+                                    Padding="0"
                                     FontAttributes="Bold"
                                     Text="E-mail:"
                                     TextColor="White" />
@@ -130,10 +133,10 @@
                                             Source="avatar" />
 
                                         <Entry
-                                            Keyboard="Email"
                                             Grid.ColumnSpan="2"
                                             Margin="45,-6"
                                             FontSize="Small"
+                                            Keyboard="Email"
                                             Placeholder="Digite seu login"
                                             Text="{Binding Credenciais.Email}"
                                             TextColor="DimGray" />
